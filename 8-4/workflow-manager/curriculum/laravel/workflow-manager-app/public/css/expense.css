@@ -1,0 +1,463 @@
+
+/* メイン */
+.attendance-main {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 0 36px;
+    box-sizing: border-box;
+}
+
+
+/* ----------------------------------------
+   メニューボタン
+---------------------------------------- */
+.menu {
+    margin-bottom: 30px;
+}
+
+.menu a {
+    display: block;
+    padding: 16px;
+    font-size: 18px;
+    color: #555;
+    background-color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+
+/* ----------------------------------------
+   全体ラッパー
+---------------------------------------- */
+.attendance-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ----------------------------------------
+   ヘッダー
+---------------------------------------- */
+.home-header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px;
+    box-sizing: border-box;
+}
+
+.header-left {
+    font-weight: bold;
+    font-size: 30px;
+    color: #555;
+}
+
+.header-right .back-btn {
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #888;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+/* ----------------------------------------
+   年月セレクト
+---------------------------------------- */
+.month-picker {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+}
+
+.month-picker select {
+    background-color: #fff;
+    border: none;
+    padding: 4px 30px 4px 8px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #363636;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpolygon points='0,0 10,0 5,6' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px 6px;
+}
+
+/* ----------------------------------------
+   テーブルラッパー
+---------------------------------------- */
+.attendance-table-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    margin-bottom: 10px;
+}
+
+/* ----------------------------------------
+   経費一覧テーブル
+---------------------------------------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f5f5f5;
+}
+
+th {
+    border: 1px solid #ccc;
+    padding: 6px 3px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    background-color: #888;
+}
+
+td {
+    border: 1px solid #ccc;
+    padding: 6px 3px;
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    background-color: #fff;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.submit-btn {
+    background-color: #888;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.resubmit-btn {
+    color: red;          /* 赤文字 */
+    text-decoration: underline; /* 下線 */
+    font-weight: bold;
+    cursor: pointer;
+}
+/* ----------------------------------------
+   モーダル全体
+---------------------------------------- */
+#expense-modal.modal {
+    display: none; /* 初期は非表示 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+#expense-modal .modal-content {
+    background: #fff;
+    margin: 50px auto;
+    padding: 20px 30px;
+    width: 500px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* ----------------------------------------
+   タイトル中央寄せ
+---------------------------------------- */
+#expense-modal .modal-content h2 {
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 30px;
+    color: #615f5f;
+}
+
+/* ----------------------------------------
+   行（ラベル＋入力）
+---------------------------------------- */
+#expense-modal .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+/* ラベル幅・太字 */
+#expense-modal .form-row label {
+    width: 90px;
+    font-size: 15px;
+    font-weight: bold; /* 太字 */
+    flex-shrink: 0;
+}
+
+/* 横幅統一 */
+#expense-modal .small-input,
+#expense-modal .amount-input,
+#expense-modal input[type="date"],
+#expense-modal select {
+    width: 250px; /* 日付・種別・金額 */
+}
+
+#expense-modal .large-input,
+#expense-modal .invoice-input,
+#expense-modal .file-row .right-area {
+    width: 400px; /* 支払先・登録番号・ファイル選択 */
+}
+
+/* 高さ統一 */
+#expense-modal .form-row input,
+#expense-modal .form-row select,
+#expense-modal .form-row .amount-input input,
+#expense-modal .form-row .invoice-input,
+#expense-modal .form-row .file-name-display,
+#expense-modal textarea.large-input {
+    height: 38px;
+    line-height: normal;
+    padding: 0 30px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* ----------------------------------------
+   金額入力（¥ と （税込）） 
+---------------------------------------- */
+#expense-modal .amount-input {
+    position: relative;
+    width: 250px;
+    height: 38px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+#expense-modal .amount-input .prefix {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #555;
+    pointer-events: none;
+    width: 18px;   /* 幅を明示 */
+    text-align: center;
+}
+
+#expense-modal .amount-input .suffix {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #555;
+    pointer-events: none;
+    width: 48px;   /* 幅を明示 */
+    text-align: right;
+}
+
+#expense-modal .amount-input input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    box-sizing: border-box;
+    padding-left: 30px;   /* prefix 幅 + 余白 */
+    padding-right: 48px;  /* suffix 幅 + 余白 */
+    margin: 0;
+}
+
+/* ----------------------------------------
+   ファイル選択＋登録番号 横並び
+---------------------------------------- */
+#expense-modal .file-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+#expense-modal .file-row .left-area {
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+}
+
+#expense-modal .file-row .right-area {
+    width: 365px;
+    display: flex;
+    align-items: center;
+}
+
+#expense-modal .file-btn {
+    background-color: #f5c5c5;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+#expense-modal .file-name-display {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 7px 10px;
+    border-radius: 6px;
+    background: #fff;
+}
+
+/* 登録番号入力 */
+#expense-modal .file-row label {
+    min-width: 120px;
+    font-size: 15px;
+    font-weight: bold; /* 太字 */
+    flex-shrink: 0;
+}
+
+#expense-modal .invoice-input-wrapper {
+    position: relative;
+    width: 365px;
+}
+
+#expense-modal .invoice-input-wrapper .prefix {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#expense-modal .invoice-input-wrapper input {
+    width: 100%;
+    padding-left: 25px;
+    height: 38px;       /* 他フォームと揃える */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #999;
+}
+
+#expense-modal .invoice-input-wrapper input:not(:placeholder-shown) {
+    color: #000;
+}
+
+#expense-modal .invoice-input-wrapper input::placeholder {
+    color: #999;
+}
+
+/* ----------------------------------------
+   テキストエリア（用途）
+---------------------------------------- */
+#expense-modal textarea.large-input {
+    height: auto;
+    min-height: 72px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* ----------------------------------------
+   申請ボタン
+---------------------------------------- */
+#expense-modal .center {
+    justify-content: center;
+    margin-top: 20px; /* 少し下にずらす */
+}
+
+#expense-modal .submit-btn {
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    padding: 10px 50px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ----------------------------------------
+   日付・種別・金額 横幅揃え
+---------------------------------------- */
+#expense-modal input[type="date"],
+#expense-modal select,
+#expense-modal .amount-input {
+    display: block;
+    width: 250px;
+}
+
+#expense-modal select {
+    padding: 4px 24px 4px 8px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpolygon points='0,0 10,0 5,6' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 30px center;
+    background-size: 12px 8px;
+}
+
+/* 金額入力スピンボタン消去 */
+#expense-modal input[type=number]::-webkit-inner-spin-button,
+#expense-modal input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#expense-modal input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* 登録番号ラベル微調整 */
+#expense-modal .file-row label[for="invoice_number"] {
+    padding-left: 22px;
+    box-sizing: border-box;
+}
+
+.reject-line {
+    display: inline-block;
+    color: #ff0000;
+    border-bottom: 1px solid #f40404;
+    font-size: 14px;
+    font-weight: bold;
+}

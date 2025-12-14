@@ -1,0 +1,169 @@
+/* 全体ラッパー */
+.attendance-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ヘッダー */
+.home-header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px;
+    box-sizing: border-box;
+}
+
+.header-left {
+    font-weight:bold;
+    font-size: 30px;
+    color: #555;
+}
+
+.header-right a.back-btn {
+    padding: 10px 28px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #888;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+
+/* ===== 承認ヘッダー ===== */
+.approval-header {
+    display: flex;
+    align-items: flex-end; /* ← 稼働報告を相対的に上へ */
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    padding: 24px 36px 5px;
+    box-sizing: border-box;
+}
+
+/* ===== 対象スタッフ（ラベル＋名前を一体に） ===== */
+.staff-display {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.staff-display .label {
+    background-color: #8c8c8c;
+    color: #fff;
+    padding: 4px 10px;
+    font-weight: bold;
+}
+
+.staff-display .name {
+    background-color: #fff;
+    border-left: none;         /* ← つなげる */
+    padding: 4px 12px;
+    color: #000;
+    width: 80px;
+}
+
+
+/* ===== 右側：年月セレクト ===== */
+.approval-header .month-picker {
+    display: flex;
+    gap: 8px;
+    width: auto;
+    padding: 0;
+    margin-bottom: 4px; /* 下線との距離を確保 */
+}
+
+
+
+/* 表ラッパー */
+.attendance-table-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 36px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    margin-bottom: 2px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f5f5f5;
+}
+
+th {
+    border: 1px solid #ccc;
+    padding: 6px 3px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    background-color: #888;
+}
+
+td {
+    border: 1px solid #ccc;
+    padding: 2px 2px;
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    background-color: #fff;
+}
+
+input[type="time"],
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+
+
+/* デフォルト → 白 */
+tr td,
+tr td * {
+    background-color: #fff;
+    color: #000;
+}
+
+/* 管理者承認済み → 青 */
+tr.admin-approved td,
+tr.admin-approved td * {
+    background-color: #fcf4f4;
+}
+
+/* 申請済み → 緑 */
+tr.approved td,
+tr.approved td * {
+    background-color: #edf9f0;
+}
+
+/* 差戻済み → ピンク */
+tr.rejected td,
+tr.rejected td * {
+    background-color: #fceff0;
+}

@@ -1,0 +1,316 @@
+/* メイン */
+.attendance-main {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 0 36px;
+    box-sizing: border-box;
+}
+
+/* ----------------------------------------
+   メニューボタン
+---------------------------------------- */
+.menu {
+    margin-bottom: 30px;
+}
+
+.menu a {
+    display: block;
+    padding: 16px;
+    font-size: 18px;
+    color: #555;
+    background-color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+/* ----------------------------------------
+   全体ラッパー
+---------------------------------------- */
+.attendance-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ----------------------------------------
+   ヘッダー
+---------------------------------------- */
+.home-header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px;
+    box-sizing: border-box;
+}
+
+.header-left {
+    font-weight: bold;
+    font-size: 30px;
+    color: #555;
+}
+
+.header-right .back-btn {
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #888;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+/* ----------------------------------------
+   サマリ（有給残数など）
+---------------------------------------- */
+.summary-container {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 20px;
+}
+
+.summary-box {
+    background-color: #f5f5f5; /* テーブルtdと同じ */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* 中央揃え */
+    min-width: 120px;
+    min-height: 38px; /* 高さを固定または最小値に */
+    box-sizing: border-box;
+    border: none; /* 外枠線を消す */
+    padding: 0;
+}
+
+
+.summary-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #888;
+    width: 100%;
+    text-align: center;
+    padding: 2px 0; /* タイトルだけ少し余白 */
+}
+
+.summary-value {
+    font-size: 12px;
+    color: #000;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    padding: 4px 0; /* 上下に少し余白 */
+    line-height: 14px; /* 文字の縦幅調整 */
+}
+
+
+/* ----------------------------------------
+   年月セレクト
+---------------------------------------- */
+.month-picker {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+}
+
+.month-picker select {
+    background-color: #fff;
+    border: none;
+    padding: 4px 30px 4px 8px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #363636;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpolygon points='0,0 10,0 5,6' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px 6px;
+}
+
+/* ----------------------------------------
+   テーブルラッパー
+---------------------------------------- */
+.attendance-table-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    margin-bottom: 10px;
+}
+
+/* ----------------------------------------
+   テーブル
+---------------------------------------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f5f5f5;
+}
+
+th {
+    border: 1px solid #ccc;
+    padding: 6px 3px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    background-color: #888;
+}
+
+td {
+    border: 1px solid #ccc;
+    padding: 6px 3px;
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    background-color: #fff;
+}
+
+a {
+    color: #555;
+    text-decoration: none;
+}
+
+.submit-btn {
+    background-color: #888;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.resubmit-btn {
+    color: red;
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ----------------------------------------
+   モーダル
+---------------------------------------- */
+/* ▼ 共通モーダル（新規申請 & 再申請） */
+#leave-common-modal.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* 中身ボックス */
+#leave-common-modal .modal-content {
+    background: #fff;
+    margin: 50px auto;
+    padding: 20px 30px;
+    width: 500px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* タイトル */
+#leave-common-modal .modal-content h2 {
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 30px;
+    color: #615f5f;
+}
+
+/* 各行 */
+#leave-common-modal .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+/* ラベル */
+#leave-common-modal .form-row label {
+    width: 90px;
+    font-size: 15px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* input / select */
+#leave-common-modal .form-row input,
+#leave-common-modal .form-row select {
+    width: 250px;
+    height: 38px;
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* textarea（備考） */
+#leave-common-modal textarea {
+    width: 375px;
+    height: 76px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+/* ボタン行中央寄せ */
+#leave-common-modal .form-row.center {
+    justify-content: center;
+}
+
+/* ボタン */
+#leave-common-modal .submit-btn {
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    padding: 10px 50px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.reject-line {
+    display: inline-block;
+    color: #ff0000;
+    border-bottom: 1px solid #f40404;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+

@@ -1,0 +1,386 @@
+/* 全体ラッパー */
+.attendance-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ヘッダー */
+.home-header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px;
+    box-sizing: border-box;
+}
+
+.header-left {
+    font-weight:bold;
+    font-size: 30px;
+    color: #555;
+}
+
+.header-right a.back-btn {
+    padding: 10px 28px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #888;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+.header-right a.pdf-btn {
+    padding: 10px 28px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #f3c2c2;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+/* 年月セレクト */
+.month-picker {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 12px 36px 0px;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+}
+
+.month-picker select {
+    background-color: #fff;
+    border: none;
+    padding: 4px 30px 4px 8px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #363636;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* 下向き矢印 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpolygon points='0,0 10,0 5,6' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px 6px;
+}
+
+
+/* ===== 承認ヘッダー ===== */
+.approval-header {
+    display: flex;
+    align-items: flex-end; /* ← 稼働報告を相対的に上へ */
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    padding: 24px 36px 5px;
+    box-sizing: border-box;
+}
+
+/* ===== 対象スタッフ（ラベル＋名前を一体に） ===== */
+.staff-display {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.staff-display .label {
+    background-color: #8c8c8c;
+    color: #fff;
+    padding: 4px 10px;
+    font-weight: bold;
+}
+
+.staff-display .name {
+    background-color: #fff;
+    border-left: none;         /* ← つなげる */
+    padding: 4px 12px;
+    color: #000;
+    width: 80px;
+}
+
+
+/* ===== 右側：年月セレクト ===== */
+.approval-header .month-picker {
+    display: flex;
+    gap: 8px;
+    width: auto;
+    padding: 0;
+    margin-bottom: 4px; /* 下線との距離を確保 */
+}
+
+
+
+/* 表ラッパー */
+.attendance-table-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 36px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    margin-bottom: 2px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f5f5f5;
+}
+
+th {
+    border: 1px solid #ccc;
+    padding: 6px 3px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    background-color: #888;
+}
+
+td {
+    border: 1px solid #ccc;
+    padding: 2px 2px;
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    background-color: #fff;
+}
+
+input[type="time"],
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.2);
+}
+/* 月末サマリー + ボタンを同じ行 */
+.summary-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+
+    align-items: flex-start;        /* 上端を揃える */
+    padding: 0 36px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    gap: 8px;
+}
+
+.summary-box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-width: 120px;
+}
+
+.summary-title {
+    background-color: #888;
+    color: #fff;
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.summary-value {
+    background-color: #fff;
+    color: #000;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+/* 右端ボタン */
+.summary-right {
+    display: flex;
+    align-items: flex-start; /* サマリーの上端に揃える */
+}
+
+.submit-btn {
+    background-color: #888;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+tr.submitted td,
+tr.submitted input,
+tr.submitted select,
+tr.submitted textarea {
+    background-color: #fce8e8 !important;
+    color: #000 !important;
+}
+
+/* 申請解除されたとき元に戻す */
+tr:not(.submitted) td,
+tr:not(.submitted) input,
+tr:not(.submitted) select,
+tr:not(.submitted) textarea {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+/* ----------------------------------------
+   差し戻しコメントモーダル
+---------------------------------------- */
+#rejection-modal.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+#rejection-modal .modal-content {
+    background: #fff;
+    margin: 50px auto;
+    padding: 20px 30px;
+    width: 500px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+#rejection-modal .modal-content h2 {
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 20px; /* 少し狭め */
+    color: #615f5f;
+}
+
+/* コメントテキストとフォームの間のスペースを狭める */
+#rejection-modal .modal-content p {
+    margin: 0 0 8px 0; /* 下の余白を縮める */
+}
+
+/* コメント入力 */
+#rejection-modal textarea {
+    width: 100%;
+    height: 90px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+/* ボタン全体を横並び中央 */
+#rejection-modal .modal-footer {
+    text-align: center;
+    margin-top: 20px; /* 少し縮める */
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* ボタン間隔 */
+}
+
+/* 共通ボタン */
+#rejection-modal .modal-btn {
+    width: 120px; /* 横幅を統一 */
+    padding: 10px 0;
+    border: none;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* OK → ピンク */
+#rejection-modal .ok-btn {
+    background-color: #ffc3d2;
+}
+
+/* キャンセル → グレー */
+#rejection-modal .cancel-btn {
+    background-color: #aaaaaa;
+}
+/* 承認済み */
+tr.approved td,
+tr.approved td * {
+    background-color: #edf9f0 !important; /* 薄緑 */
+    color: #000 !important;
+}
+
+/* 差戻済み */
+tr.rejected td,
+tr.rejected td * {
+    background-color: #fceff0 !important; /* 薄赤 */
+    color: #000 !important;
+}
+
+/* 未承認・未差戻 */
+tr:not(.approved):not(.rejected) td,
+tr:not(.approved):not(.rejected) td * {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+/* ボタンエリアを右端に寄せる */
+.approval-btn-area {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: flex-end; /* 右端に寄せる */
+    gap: 8px; /* ボタン間隔 */
+    padding: 0 36px; /* 表と同じパディング */
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+/* 修正ボタン：ピンク・白文字 */
+.approval-btn-area .edit-btn {
+    background-color: #f3c2c2;
+    color: #fff;
+    border: none;
+    padding: 10px 35px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none !important;     /* ← コレ追加！ */
+}
+
+.approval-btn-area .edit-btn:hover {
+    text-decoration: none;     /* ← ホバー時も消す */
+    opacity: 0.85;             /* ホバー演出（任意） */
+}
+
+
+
+

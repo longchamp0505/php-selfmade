@@ -1,0 +1,262 @@
+/* 全体ラッパー */
+.attendance-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ヘッダー */
+.home-header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px;
+    box-sizing: border-box;
+}
+
+.header-left {
+    font-weight:bold;
+    font-size: 30px;
+    color: #555;
+}
+
+/* 共通ボタン */
+.update-btn,
+.back-btn {
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-left: 8px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.update-btn {
+    background-color: #f3c2c2;
+    border: none;
+}
+
+.back-btn {
+    background-color: #8c8c8c;
+}
+
+/* ▼ 本文 */
+.edit-body {
+    max-width: 1200px;
+    width: 100%;
+    padding: 10px 36px;
+    box-sizing: border-box;
+}
+
+/* ▼ 基本情報 + 有給情報 横並び */
+.info-flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px; /* ← ここだけ空ける */
+}
+
+/* ▼ 各ブロック */
+.info-block,
+.paidleave-block {
+    flex: 1;
+}
+
+/* ▼ 見出し */
+h3 {
+    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #555;
+}
+
+
+/* ▼ 表（gridで完全フラットの行） */
+.info-grid {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+/* 行（display: contents で隙間ゼロ） */
+.info-row {
+    display: contents;
+}
+
+/* ▼ ラベル（左セル） */
+.info-row label {
+    background: #8c8c8c;
+    color: #fff;
+    padding: 8px 10px;
+    font-size: 12px;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+/* ▼ 値（右セル） */
+.info-row input,
+.info-row select,
+.info-row div {
+    background: #fff;
+    padding: 8px 10px;
+    font-size: 12px;
+    border-bottom: 1px solid #ccc;   /* ← 固定値と同じ線 */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+/* ▼ ラベル・値を中央揃え */
+.info-row label,
+.info-row input,
+.info-row select,
+.info-row div,
+.info-row a {
+    text-align: center;
+    justify-content: center;
+}
+
+/* ▼ 入力欄：黒枠は消しつつ、下線は残す */
+.info-row input,
+.info-row select {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid #ccc !important;
+    width: 100%;
+    background: #fff;
+}
+
+
+
+/* パスワード初期化ピンクボタン */
+.pink-btn {
+    background-color: #f28989;
+    color: #ffffff;
+    padding: 12px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;                /* ← これ！ */
+    justify-content: center;      /* ← 横中央 */
+    align-items: center;          /* ← 縦中央 */
+    font-weight: bold;
+    transition: opacity 0.2s;
+    font-size: 12px;
+    border: none;
+    width: 150px;
+    margin-top: -70px;
+    margin-bottom: 50px;
+}
+
+
+.pink-btn:hover {
+    opacity: 0.85;
+}
+
+
+.value-with-input {
+    display: flex;
+    align-items: center;
+    padding: 0;          /* ← 余計なズレ防止 */
+    border: none;
+    background: none;
+}
+
+/* input・select を枠なし＋白背景＋下線だけに統一 */
+.value-with-input input,
+.value-with-input select {
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* 年セレクト */
+.month-picker {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+.month-picker select {
+    background-color: #fff;
+    border: none;
+    padding: 4px 30px 4px 8px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #363636;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpolygon points='0,0 10,0 5,6' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px 6px;
+}
+
+/* テーブル */
+.attendance-table-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f5f5f5;
+}
+thead th {
+    border: 1px solid #ccc;
+    padding: 10px 3px; /* 縦幅を広げる */
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    background-color: #888;
+}
+tbody td {
+    border: 1px solid #ccc;
+    padding: 9px 3px; /* 縦幅を広げる */
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    background-color: #fff;
+}
+tbody tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
+
+.error-msg {
+    color: red;
+    font-size: 0.9em;
+    margin-left: 5px;
+}

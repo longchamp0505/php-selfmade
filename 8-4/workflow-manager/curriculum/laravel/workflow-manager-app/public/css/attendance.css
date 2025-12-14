@@ -1,0 +1,174 @@
+/* ===========================
+   勤怠打刻画面 CSS（修正版）
+=========================== */
+
+.attendance-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ヘッダー（ホーム画面と共通） */
+.home-header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px;
+    box-sizing: border-box;
+}
+
+.header-left {
+    font-weight: bold;
+    font-size: 30px;
+    color: #555;
+}
+
+.header-right .back-btn {
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #888;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+/* メイン */
+.attendance-main {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 0 36px;
+    box-sizing: border-box;
+}
+
+/* 勤怠入力リンク（メニュー） */
+.menu {
+    margin-bottom: 30px;
+}
+
+.menu a {
+    display: block;
+    padding: 16px;
+    font-size: 18px;
+    color: #555;
+    background-color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+/* 日付・時刻表示 */
+.display-area {
+    text-align: center;
+}
+
+.display-area .date {
+    font-size: 20px;
+    color: #555;
+    font-weight: bold;
+}
+
+.display-area .time {
+    font-size: 65px;
+    font-weight: bold;
+    color: #444;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    letter-spacing: 10px; /* 数字間の余白を追加 */
+
+}
+
+/* 出勤・退勤ボタン */
+.button-area {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+/* 出退勤ボタン共通 */
+.button-area .btn {
+    color: #fff;
+    padding: 25px 50px;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+/* 出勤ボタン */
+.start-btn {
+    background-color: #ffc3d2; /* ピンク系 */
+}
+
+.start-btn:hover:not(:disabled) {
+    background-color: #ffb0c0; /* ホバーで少し濃く */
+}
+
+/* 退勤ボタン */
+.end-btn {
+    background-color: #aaaaaa; /* グレー系 */
+}
+
+.end-btn:hover:not(:disabled) {
+    background-color: #888888; /* ホバーで少し濃く */
+}
+
+/* ボタン押せない状態 */
+.button-area .btn:disabled {
+    background-color: #dddddd;
+    color: #777777;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+.attendance-message {
+    color: #b00020; /* 深めの赤で落ち着き */
+    font-weight: bold;
+    font-size: 1.1em;
+    text-align: center;
+    margin-bottom: 10px;
+    animation: fadeInMessage 0.8s ease-in-out; /* フェードイン */
+}
+
+/* フェードインアニメーション */
+@keyframes fadeInMessage {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+/* スマホ対応 */
+@media (max-width: 550px) {
+    .button-area {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .display-area .date {
+        font-size: 24px;
+    }
+    .display-area .time {
+        font-size: 50px;
+    }
+    .button-area .btn {
+        padding: 18px 50px;
+        font-size: 22px;
+    }
+}

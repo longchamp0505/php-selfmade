@@ -1,0 +1,51 @@
+/* 全体ラッパー */
+.home-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ヘッダー全幅 */
+.home-header {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ヘッダー内のコンテンツ */
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+/* レスポンシブ共通設定 */
+@media (max-width: 1200px) {
+    .header-inner {
+        padding: 0 16px;
+    }
+}
+@media (max-width: 768px) {
+    .home-header {
+        height: 70px;
+    }
+}
+@media (max-width: 550px) {
+    .home-header {
+        height: 60px;
+    }
+}

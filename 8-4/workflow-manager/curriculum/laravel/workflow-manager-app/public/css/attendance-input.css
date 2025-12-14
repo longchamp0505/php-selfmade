@@ -1,0 +1,261 @@
+/* 全体ラッパー */
+.attendance-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ヘッダー */
+.home-header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px;
+    box-sizing: border-box;
+}
+
+.header-left {
+    font-weight:bold;
+    font-size: 30px;
+    color: #555;
+}
+
+.header-right .back-btn {
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #888;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+/* 年月セレクト */
+.month-picker {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 12px 36px 0px;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+}
+
+.month-picker select {
+    background-color: #fff;
+    border: none;
+    padding: 4px 30px 4px 8px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #363636;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* 下向き矢印 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpolygon points='0,0 10,0 5,6' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px 6px;
+}
+
+/* PDFボタン */
+.pdf-button-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 36px;
+    margin-bottom: 2px;
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+}
+
+.pdf-btn {
+    background-color: #ffc3d2;
+    border: none;
+    padding: 6px 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #fff;
+}
+
+a.pdf-btn,
+a.pdf-btn:link,
+a.pdf-btn:visited,
+a.pdf-btn:hover,
+a.pdf-btn:active,
+a.pdf-btn:focus {
+    text-decoration: none !important;
+    display: inline-block;
+}
+
+/* 表ラッパー */
+.attendance-table-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 36px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    margin-bottom: 2px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f5f5f5;
+}
+
+th {
+    border: 1px solid #ccc;
+    padding: 6px 3px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    background-color: #888;
+}
+
+td {
+    border: 1px solid #ccc;
+    padding: 2px 2px;
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    background-color: #fff;
+}
+
+input[type="time"],
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.2);
+}
+/* 月末サマリー + ボタンを同じ行 */
+.summary-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between; /* 左にサマリー、右にボタン */
+    align-items: flex-start;        /* 上端を揃える */
+    padding: 0 36px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    gap: 8px;
+}
+
+.summary-left {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-top: 12px;
+}
+
+.summary-box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-width: 80px;
+}
+
+.summary-title {
+    background-color: #888;
+    color: #fff;
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.summary-value {
+    background-color: #fff;
+    color: #000;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+/* 右端ボタン */
+.summary-right {
+    display: flex;
+    align-items: flex-start; /* サマリーの上端に揃える */
+}
+
+.submit-btn {
+    background-color: #888;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* 申請済み（提出済み） */
+tr.submitted td,
+tr.submitted input,
+tr.submitted select,
+tr.submitted textarea {
+    background-color: #edf9f0; /* 緑 */
+    color: #000;
+}
+
+/* 承認済み */
+tr.approved td,
+tr.approved input,
+tr.approved select,
+tr.approved textarea {
+    background-color: #edf9f0; /* 薄緑 */
+    color: #000;
+}
+
+
+/* 差戻し（再申請前） */
+tr.rejected td,
+tr.rejected input,
+tr.rejected select,
+tr.rejected textarea {
+    background-color: #fceff0; /* 薄ピンク */
+    color: #000;
+}
+
+/* 未提出・申請解除 */
+tr:not(.submitted):not(.rejected):not(.approved) td,
+tr:not(.submitted):not(.rejected):not(.approved) input,
+tr:not(.submitted):not(.rejected):not(.approved) select,
+tr:not(.submitted):not(.rejected):not(.approved) textarea {
+    background-color: #fff; /* 白 */
+    color: #000;
+}
+
+.rejection-comment {
+    color: #d9534f;               /* 赤文字 */
+}
+
+.rejection-comment::before {
+    content: "※ ";
+}

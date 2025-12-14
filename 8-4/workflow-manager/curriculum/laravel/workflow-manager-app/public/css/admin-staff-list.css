@@ -1,0 +1,341 @@
+/* 共通ラッパー */
+.attendance-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ヘッダー */
+.home-header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px;
+    box-sizing: border-box;
+}
+
+.header-left {
+    font-weight: bold;
+    font-size: 30px;
+    color: #555;
+}
+
+.header-right a.back-btn {
+    padding: 10px 28px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #888;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+.header-right a.csv-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #f3c2c2;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+/* 年月セレクト */
+.month-picker {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 12px 36px 0px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+.month-picker select {
+    background-color: #fff;
+    border: none;
+    padding: 4px 30px 4px 8px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #363636;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpolygon points='0,0 10,0 5,6' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px 6px;
+}
+
+/* 共通高さ変数（年月セレクトと同じ高さ） */
+:root {
+    --input-height: 32px;
+}
+
+/* 検索ボックス */
+.search-box {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 18px 5px;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 8px; /* セレクトボックスとの間だけに効かせる */
+}
+
+/* 検索フォーム＋虫眼鏡ボタンラッパー */
+.search-box .search-input-wrapper {
+    display: flex;
+    height: var(--input-height);
+}
+
+/* テキスト入力（検索フォーム） */
+.search-box input[type="text"] {
+    width: 180px; /* 小さく固定幅 */
+    height: 100%;
+    padding: 0 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-right: none; /* ボタンとくっつける */
+    border-radius: 4px 0 0 4px;
+    box-sizing: border-box;
+}
+
+/* 検索ボタン（虫眼鏡） */
+.search-box .search-btn {
+    width: var(--input-height);
+    height: 100%;
+    border: 1px solid #888;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    background-color: #888;
+    cursor: pointer;
+    text-indent: -9999px; /* 文字非表示 */
+    background-image: url("data:image/svg+xml,%3Csvg fill='white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10,2A8,8 0 1,0 18,10A8,8 0 0,0 10,2ZM10,4A6,6 0 1,1 4,10A6,6 0 0,1 10,4ZM21,21L15.65,15.65' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    box-sizing: border-box;
+}
+
+/* セレクトボックス */
+.search-box select {
+    width: 120px; /* 固定幅で広く */
+    height: var(--input-height);
+    padding: 0 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpolygon points='0,0 10,0 5,6' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px 6px;
+    box-sizing: border-box;
+}
+
+/* クリアボタン */
+.search-box .clear-btn {
+    width: 80px; /* 固定幅 */
+    height: var(--input-height);
+    background-color: #929191; /* グレー背景 */
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+/* テーブル */
+.attendance-table-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 36px;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f5f5f5;
+}
+
+thead th {
+    border: 1px solid #ccc;
+    padding: 10px 3px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    background-color: #888;
+}
+
+tbody td {
+    border: 1px solid #ccc;
+    padding: 9px 3px;
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    background-color: #fff;
+}
+
+tbody tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
+
+.total-row td {
+    font-weight: bold;
+    background-color: #faecec !important;
+}
+
+.attendance-table-wrapper table tbody td a:link,
+.attendance-table-wrapper table tbody td a:visited {
+    color: #2301ff !important;
+    text-decoration: none;
+}
+
+.attendance-table-wrapper table tbody td a:hover {
+    color: #f7b6b6 !important;
+    text-decoration: underline;
+}
+
+/* PDFボタン */
+.pdf-button-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 36px;
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    margin-top: 12px;
+}
+
+.pdf-btn {
+    background-color: #ffc3d2;
+    border: none;
+    padding: 6px 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #fff;
+}
+
+/* ページネーション */
+.pagination-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 12px 36px;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* ----------------------------------------
+   差し戻しコメントモーダル
+---------------------------------------- */
+#rejection-modal.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+#rejection-modal .modal-content {
+    background: #fff;
+    margin: 50px auto;
+    padding: 20px 30px;
+    width: 500px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+#rejection-modal .modal-content h2 {
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 20px; /* 少し狭め */
+    color: #615f5f;
+}
+
+/* コメントテキストとフォームの間のスペースを狭める */
+#rejection-modal .modal-content p {
+    margin: 0 0 8px 0; /* 下の余白を縮める */
+}
+
+/* コメント入力 */
+#rejection-modal textarea {
+    width: 100%;
+    height: 90px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+/* ボタン全体を横並び中央 */
+#rejection-modal .modal-footer {
+    text-align: center;
+    margin-top: 20px; /* 少し縮める */
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* ボタン間隔 */
+}
+
+/* 共通ボタン */
+#rejection-modal .modal-btn {
+    width: 120px; /* 横幅を統一 */
+    padding: 10px 0;
+    border: none;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* OK → ピンク */
+#rejection-modal .ok-btn {
+    background-color: #ffc3d2;
+}
+
+/* キャンセル → グレー */
+#rejection-modal .cancel-btn {
+    background-color: #aaaaaa;
+}
