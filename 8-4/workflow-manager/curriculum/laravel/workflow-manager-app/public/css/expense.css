@@ -29,6 +29,10 @@
     text-decoration: none;
 }
 
+.menu a:hover {
+    background-color: #e6e6e6;
+    color: #333;
+}
 
 /* ----------------------------------------
    全体ラッパー
@@ -82,6 +86,11 @@
     text-decoration: none;
 }
 
+.header-right .back-btn:hover {
+    background-color: #666;
+}
+
+
 /* ----------------------------------------
    年月セレクト
 ---------------------------------------- */
@@ -109,6 +118,12 @@
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 10px 6px;
+}
+
+.month-picker select:hover {
+    background-color: #e6e6e6;
+    color: #333;
+
 }
 
 /* ----------------------------------------
@@ -260,7 +275,6 @@ a {
     position: relative;
     width: 250px;
     height: 38px;
-    border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
     background: #fff;
@@ -460,4 +474,39 @@ a {
     border-bottom: 1px solid #f40404;
     font-size: 14px;
     font-weight: bold;
+}
+
+/* ================================
+   モーダル内 hover 共通
+================================ */
+
+/* セレクト・入力 hover */
+#expense-modal input:hover,
+#expense-modal select:hover,
+#expense-modal textarea:hover {
+    background-color: #e6e6e6;
+}
+
+/* フォーカス時も少し強調 */
+#expense-modal input:focus,
+#expense-modal select:focus,
+#expense-modal textarea:focus {
+    background-color: #e6e6e6;
+    outline: none;
+    border-color: #999;
+}
+
+/* ファイル選択ボタン hover */
+#expense-modal .file-btn:hover {
+    background-color: #e8a5a5;
+}
+
+/* 申請ボタン hover */
+#expense-modal .submit-btn:hover {
+    background-color: #999;
+}
+
+/* × ボタンなどリンク系があれば */
+#expense-modal a:hover {
+    opacity: 0.8;
 }

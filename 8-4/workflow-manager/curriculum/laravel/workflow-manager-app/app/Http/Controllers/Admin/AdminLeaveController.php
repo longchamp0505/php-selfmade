@@ -181,16 +181,121 @@ class AdminLeaveController extends Controller
     public function approve(Request $request)
     {
         $leaveId = $request->leave_id;
-        $approve = $request->approve; // 1 or 0
+        $approve = (int) $request->approve; // 1 or 0
 
-        $leave = Leave::find($leaveId);
-        if ($leave) {
-            $leave->is_approved_by_admins = $approve;
-            $leave->admins_approved_at = $approve ? now() : null;
-            $leave->save();
+        $leave = Leave::with('user.paidLeave')->find($leaveId);
+
+        if (!$leave) {
+            return response()->json([
+                'success' => false,
+                'message' => 'データが存在しません'
+            ]);
         }
+
+        $paid = $leave->user->paidLeave;
+
+        /**
+         * ▼ 承認ON
+         */
+        if ($approve === 1) {
+
+            // 二重承認防止
+            if ($leave->is_approved_by_admins) {
+                return response()->json([
+                    'success' => true,
+                    'user_id' => $leave->user_id,
+                    'remaining_days' => $paid?->remaining_days,
+                    'current_year_taken' => $paid?->current_year_taken,
+                ]);
+            }
+
+            // 有給のみ日数処理
+            if ($leave->leave_type === '有給') {
+
+                if (!$paid || $paid->remaining_days <= 0) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => '有給残日数が不足しています'
+                    ]);
+                }
+
+                $paid->decrement('remaining_days', 1);
+                $paid->increment('current_year_taken', 1);
+            }
+
+            $leave->update([
+                'is_approved_by_admins' => 1,
+                'admins_approved_at' => now(),
+            ]);
+        }
+
+        /**
+         * ▼ 承認OFF（取消）
+         */
+        if ($approve === 0) {
+
+            // 未承認なら何もしない
+            if (!$leave->is_approved_by_admins) {
+                return response()->json([
+                    'success' => true,
+                    'user_id' => $leave->user_id,
+                    'remaining_days' => $paid?->remaining_days,
+                    'current_year_taken' => $paid?->current_year_taken,
+                ]);
+            }
+
+            if ($leave->leave_type === '有給' && $paid) {
+                if ($paid->current_year_taken > 0) {
+                    $paid->increment('remaining_days', 1);
+                    $paid->decrement('current_year_taken', 1);
+                }
+            }
+
+            $leave->update([
+                'is_approved_by_admins' => 0,
+                'admins_approved_at' => null,
+            ]);
+        }
+
+        /**
+         * ▼ 共通レスポンス（★ここが重要）
+         */
+        return response()->json([
+            'success' => true,
+            'user_id' => $leave->user_id,
+            'remaining_days' => $paid?->remaining_days ?? 0,
+            'current_year_taken' => $paid?->current_year_taken ?? 0,
+        ]);
+    }
+
+    public function reject(Request $request)
+    {
+        $leave = Leave::find($request->leave_id);
+
+        if (!$leave) {
+            return response()->json(['success' => false]);
+        }
+
+        if (
+            ($request->has('cancel') && $request->cancel) ||
+            ($request->has('is_rejection') && $request->is_rejection === false)
+        ) {
+            // ▼ 差戻解除
+            $leave->is_rejection = 0;
+            $leave->rejection_comment = null;
+            // 承認状態は維持
+        } else {
+            // ▼ 差戻設定
+            $leave->is_rejection = 1;
+            $leave->rejection_comment = $request->rejection_comment ?? '';
+            $leave->is_approved_by_admins = 0;
+            $leave->admins_approved_at = null; // ← approve と対称にするなら入れる
+        }
+
+        $leave->save();
 
         return response()->json(['success' => true]);
     }
+
 
 }

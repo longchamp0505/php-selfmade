@@ -47,6 +47,10 @@
     margin-left: 8px;
 }
 
+.header-right .back-btn:hover {
+    background-color: #666;
+}
+
 
 /* ===== 承認ヘッダー ===== */
 .approval-header {
@@ -167,3 +171,51 @@ tr.rejected td,
 tr.rejected td * {
     background-color: #fceff0;
 }
+
+
+/* ===========================
+   入力欄ホバー・フォーカス
+=========================== */
+
+/* ホバー時 */
+input[type="time"]:hover,
+input[type="text"]:hover,
+select:hover,
+textarea:hover {
+    background-color: #f0f7ff;   /* 薄い青 */
+    border-color: #6aa9ff;
+}
+
+/* フォーカス時（入力中） */
+input[type="time"]:focus,
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+    background-color: #ffffff;
+    border-color: #3b82f6;
+    outline: none;              /* デフォルト枠を消す */
+}
+
+/* hover 時 */
+input[type="checkbox"]:hover {
+    filter: brightness(0.85);
+}
+
+
+/* 状態付き行（提出済み・承認済み・差戻し）はホバー無効 */
+tr.submitted input:hover,
+tr.approved input:hover,
+tr.rejected input:hover,
+tr.admin-approved input:hover,
+tr.submitted select:hover,
+tr.approved select:hover,
+tr.rejected select:hover,
+tr.admin-approved select:hover,
+tr.submitted textarea:hover,
+tr.approved textarea:hover,
+tr.rejected textarea:hover,
+tr.admin-approved textarea:hover {
+    background-color: inherit;
+    border-color: #ccc;
+}
+

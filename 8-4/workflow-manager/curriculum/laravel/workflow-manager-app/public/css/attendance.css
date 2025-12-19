@@ -49,6 +49,10 @@
     text-decoration: none;
 }
 
+.header-right .back-btn:hover {
+    background-color: #666;
+}
+
 /* メイン */
 .attendance-main {
     flex: 1;
@@ -74,6 +78,11 @@
     background-color: #fff;
     border-radius: 8px;
     text-decoration: none;
+}
+
+.menu a:hover {
+    background-color: #e6e6e6;
+    color: #333;
 }
 
 /* 日付・時刻表示 */

@@ -249,15 +249,31 @@ class AttendanceController extends Controller
         $endTime = $request->input('end_time');
         $breakTime = $request->input('break_time');
 
-        // 必須項目チェック
-        if ($request->boolean('is_submitted')) { // 申請時のみチェック
-            if (!$category || !$startTime || !$endTime || !$breakTime) {
+        // 必須項目チェック（申請時のみ）
+        if ($request->boolean('is_submitted')) {
+
+            // 始業・終業が不要な区分
+            $noTimeRequiredCategories = ['公休', '有給', '振休', '欠勤'];
+
+            // 区分は常に必須
+            if (!$category) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => '区分・始業・終業・休憩は必須です。入力してください。'
+                    'message' => '区分を選択してください。'
                 ]);
             }
+
+            // 始業・終業が必要な区分のみチェック
+            if (!in_array($category, $noTimeRequiredCategories, true)) {
+                if (!$startTime || !$endTime) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => '始業・終業を入力してください。'
+                    ]);
+                }
+            }
         }
+
 
         $attendance = Attendance::firstOrCreate(
             ['user_id' => $userId, 'date' => $date],

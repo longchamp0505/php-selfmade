@@ -76,12 +76,12 @@
                         {{-- 時間外（1日超 + 週超） --}}
                         <td>{{ floor($data['overMinutes']/60) }}:{{ sprintf('%02d', $data['overMinutes']%60) }}</td>
 
-                        <td>{{ $data['workDays'] }}</td>
-                        <td>{{ $data['paidLeaveDays'] }}</td>
-                        <td>{{ $data['absentDays'] }}</td>
-                        <td>{{ $data['lateCount'] }}</td>
-                        <td>{{ $data['earlyLeaveCount'] }}</td>
-                        <td>{{ $data['missingClock'] }}</td>
+                        <td>{{ $data['workDays'] }}日</td>
+                        <td>{{ $data['paidLeaveDays'] }}日</td>
+                        <td>{{ $data['absentDays'] }}日</td>
+                        <td>{{ $data['lateCount'] }}回</td>
+                        <td>{{ $data['earlyLeaveCount'] }}回</td>
+                        <td>{{ $data['missingClock'] }}回</td>
                     </tr>
                     @endforeach
 
@@ -95,12 +95,12 @@
 
                         <td>{{ floor($summary['totalOverMinutes']/60) }}:{{ sprintf('%02d', $summary['totalOverMinutes']%60) }}</td>
 
-                        <td>{{ $summary['workDays'] }}</td>
-                        <td>{{ $summary['paidLeaveDays'] }}</td>
-                        <td>{{ $summary['absentDays'] }}</td>
-                        <td>{{ $summary['lateCount'] }}</td>
-                        <td>{{ $summary['earlyLeaveCount'] }}</td>
-                        <td>{{ $summary['missingClock'] }}</td>
+                        <td>{{ $summary['workDays'] }}日</td>
+                        <td>{{ $summary['paidLeaveDays'] }}日</td>
+                        <td>{{ $summary['absentDays'] }}日</td>
+                        <td>{{ $summary['lateCount'] }}回</td>
+                        <td>{{ $summary['earlyLeaveCount'] }}回</td>
+                        <td>{{ $summary['missingClock'] }}回</td>
                     </tr>
                 </tbody>
             </table>

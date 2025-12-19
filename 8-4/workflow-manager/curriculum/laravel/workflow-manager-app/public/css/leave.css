@@ -27,6 +27,11 @@
     text-decoration: none;
 }
 
+.menu a:hover {
+    background-color: #e6e6e6;
+    color: #333;
+}
+
 /* ----------------------------------------
    全体ラッパー
 ---------------------------------------- */
@@ -78,6 +83,11 @@
     border-radius: 50px;
     text-decoration: none;
 }
+
+.header-right .back-btn:hover {
+    background-color: #666;
+}
+
 
 /* ----------------------------------------
    サマリ（有給残数など）
@@ -150,6 +160,12 @@
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 10px 6px;
+}
+
+.month-picker select:hover {
+    background-color: #e6e6e6;
+    color: #333;
+
 }
 
 /* ----------------------------------------
@@ -312,5 +328,34 @@ a {
     font-weight: bold;
 }
 
+/* ================================
+   休暇申請モーダル hover
+================================ */
+
+/* input / select / textarea hover */
+#leave-common-modal input:hover,
+#leave-common-modal select:hover,
+#leave-common-modal textarea:hover {
+    background-color: #e6e6e6;
+}
+
+/* フォーカス時（入力中） */
+#leave-common-modal input:focus,
+#leave-common-modal select:focus,
+#leave-common-modal textarea:focus {
+    background-color: #e6e6e6;
+    outline: none;
+    border-color: #999;
+}
+
+/* 申請ボタン hover */
+#leave-common-modal .submit-btn:hover {
+    background-color: #999;
+}
+
+/* モーダル内リンクがあれば */
+#leave-common-modal a:hover {
+    opacity: 0.8;
+}
 
 

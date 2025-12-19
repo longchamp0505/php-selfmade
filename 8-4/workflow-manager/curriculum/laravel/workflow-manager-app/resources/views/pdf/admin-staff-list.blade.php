@@ -11,7 +11,7 @@ body {
 }
 h1 {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 13px;
 }
 .employee-info { margin-bottom: 10px; }
 .employee-info div { margin-bottom: 2px; }
@@ -23,7 +23,7 @@ table {
 }
 th, td {
     border: 1px solid #444;
-    padding: 4px;
+    padding: 3.8px 4px;
     text-align: center;
     vertical-align: middle;
 }

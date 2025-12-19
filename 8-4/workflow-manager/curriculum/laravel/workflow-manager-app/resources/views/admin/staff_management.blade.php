@@ -410,7 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(res => res.json())
                 .then(data => {
                     if(!data.success){
-                        alert("承認処理に失敗しました");
+                        alert(data.message ?? "承認処理に失敗しました");
                         cb.checked = !cb.checked;
                         return;
                     }

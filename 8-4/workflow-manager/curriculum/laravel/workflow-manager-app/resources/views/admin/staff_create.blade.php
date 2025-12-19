@@ -55,7 +55,6 @@
                         </div>
                     </div>
 
-                    <!-- 入社日 -->
                     <div class="info-row">
                         <label>入社日</label>
                         <div class="value-with-input">
@@ -77,9 +76,7 @@
                         <div class="value-with-input">
                             <select name="scheduled_days">
                                 @foreach([5,4,3,2,1] as $day)
-                                    <option value="{{ $day }}" @selected(old('scheduled_days')==$day)>
-                                        週{{ $day }}日
-                                    </option>
+                                    <option value="{{ $day }}" @selected(old('scheduled_days')==$day)>週{{ $day }}日</option>
                                 @endforeach
                             </select>
                             @error('scheduled_days')<span class="error-message">{{ $message }}</span>@enderror
@@ -91,9 +88,7 @@
                         <div class="value-with-input">
                             <select name="employment_type">
                                 @foreach($employmentTypes as $type)
-                                    <option value="{{ $type }}" @selected(old('employment_type')==$type)>
-                                        {{ $type }}
-                                    </option>
+                                    <option value="{{ $type }}" @selected(old('employment_type')==$type)>{{ $type }}</option>
                                 @endforeach
                             </select>
                             @error('employment_type')<span class="error-message">{{ $message }}</span>@enderror
@@ -113,9 +108,7 @@
                         <div class="value-with-input">
                             <select name="contract_type">
                                 @foreach($contractTypes as $type)
-                                    <option value="{{ $type }}" @selected(old('contract_type')==$type)>
-                                        {{ $type }}
-                                    </option>
+                                    <option value="{{ $type }}" @selected(old('contract_type')==$type)>{{ $type }}</option>
                                 @endforeach
                             </select>
                             @error('contract_type')<span class="error-message">{{ $message }}</span>@enderror
@@ -128,9 +121,7 @@
                             <select name="client_id">
                                 <option value="">未設定</option>
                                 @foreach($clients as $client)
-                                    <option value="{{ $client->id }}" @selected(old('client_id')==$client->id)>
-                                        {{ $client->company_name }}（{{ $client->id }}）
-                                    </option>
+                                    <option value="{{ $client->id }}" @selected(old('client_id')==$client->id)>{{ $client->company_name }}（{{ $client->id }}）</option>
                                 @endforeach
                             </select>
                             @error('client_id')<span class="error-message">{{ $message }}</span>@enderror
@@ -148,88 +139,73 @@
                     <div class="info-row">
                         <label>有給残日数（➋+➌-➊）</label>
                         <div class="value-with-unit">
-                            <input type="number" name="remaining_days" value="{{ old('remaining_days', 0) }}">
+                            <input type="number" name="remaining_days" id="remaining_days" value="0" readonly>                            
                             <span>日</span>
                             @error('remaining_days')<span class="error-message">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
                     <div class="info-row">
-                        <label>有給付与日</label>
+                        <label>次回有給付与日</label>
                         <div class="value-with-unit">
                             <input type="date" name="granted_date" id="granted_date" value="{{ old('granted_date') }}">
-                            @error('granted_date')<span class="error-message">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
                     <div class="info-row">
                         <label>➊ 当年度取得日数</label>
                         <div class="value-with-unit">
-                            <input type="number" name="current_year_taken" value="{{ old('current_year_taken', 0) }}">
+                            <input type="number" name="current_year_taken" id="current_year_taken" value="{{ old('current_year_taken', 0) }}" min="0" step="1">
                             <span>日</span>
-                            @error('current_year_taken')<span class="error-message">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
                     <div class="info-row">
-                        <label>➋ 前年度取得日数</label>
+                        <label>➋ 前年度付与日数</label>
                         <div class="value-with-unit">
-                            <input type="number" name="last_year_taken" value="{{ old('last_year_taken', 0) }}">
+                            <input type="number" name="last_year_granted" id="last_year_granted" value="{{ old('last_year_granted', 0) }}" min="0" step="1">
                             <span>日</span>
-                            @error('last_year_taken')<span class="error-message">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
                     <div class="info-row">
-                        <label>➌ 前年度繰越日数</label>
+                        <label>➌ 前年度繰越日数（➎+➏-➍）</label>
                         <div class="value-with-unit">
-                            <input type="number" name="last_year_carried" value="{{ old('last_year_carried', 0) }}">
+                            <input type="number" name="last_year_carried" id="last_year_carried" value="0" readonly>
                             <span>日</span>
                             @error('last_year_carried')<span class="error-message">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
                     <div class="info-row">
-                        <label>➍ 一昨年度取得日数</label>
+                        <label>➍ 前年度取得日数</label>
                         <div class="value-with-unit">
-                            <input type="number" name="before_last_taken" value="{{ old('before_last_taken', 0) }}">
+                            <input type="number" name="last_year_taken" id="last_year_taken" value="{{ old('last_year_taken',0) }}" min="0" step="1">
                             <span>日</span>
-                            @error('before_last_taken')<span class="error-message">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
                     <div class="info-row">
                         <label>➎ 一昨年度付与日数</label>
                         <div class="value-with-unit">
-                            <input type="number" name="two_years_ago_granted" value="{{ old('two_years_ago_granted', 0) }}">
+                            <input type="number" name="two_years_ago_granted" id="two_years_ago_granted" value="{{ old('two_years_ago_granted',0) }}" min="0" step="1">
                             <span>日</span>
-                            @error('two_years_ago_granted')<span class="error-message">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
                     <div class="info-row">
                         <label>➏ 一昨年度繰越日数</label>
                         <div class="value-with-unit">
-                            <input type="number" name="two_years_ago_carried" value="{{ old('two_years_ago_carried', 0) }}">
+                            <input type="number" name="two_years_ago_carried" id="two_years_ago_carried" value="{{ old('two_years_ago_carried',0) }}" min="0" step="1">
                             <span>日</span>
-                            @error('two_years_ago_carried')<span class="error-message">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-
-                    <div class="info-row">
-                        <label>次回失効予定日</label>
-                        <div class="value-with-unit">
-                            <input type="date" name="next_expiration_date" value="{{ old('next_expiration_date') }}">
-                            @error('next_expiration_date')<span class="error-message">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
                     <div class="info-row">
                         <label>失効予定日数（➌-➊）</label>
                         <div class="value-with-unit">
-                            <input type="number" name="expiration_days" value="{{ old('expiration_days', 0) }}">
+                            <input type="number" name="expiration_days" id="expiration_days" value="0" readonly>
                             <span>日</span>
-                            @error('expiration_days')<span class="error-message">{{ $message }}</span>@enderror
                         </div>
                     </div>
 
@@ -250,6 +226,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const hireDateInput = document.getElementById('hire_date');
     const grantDateInput = document.getElementById('granted_date');
 
+    const currentYear = document.getElementById('current_year_taken'); // ➊
+    const lastYearGranted = document.getElementById('last_year_granted'); // ➋
+    const lastYearTaken = document.getElementById('last_year_taken'); // ➍
+    const twoYearsAgoGranted = document.getElementById('two_years_ago_granted'); // ➎
+    const twoYearsAgoCarried = document.getElementById('two_years_ago_carried'); // ➏
+
+    const remainingDays = document.getElementById('remaining_days'); // ➋+➌-➊
+    const lastYearCarried = document.getElementById('last_year_carried'); // ➌
+    const expirationDays = document.getElementById('expiration_days');
+
+    // ▼ 入社日から次回付与日を自動計算
     function updateGrantDate() {
         if (hireDateInput.value) {
             const hireDate = new Date(hireDateInput.value);
@@ -262,9 +249,42 @@ document.addEventListener('DOMContentLoaded', function () {
             grantDateInput.value = '';
         }
     }
-
     hireDateInput.addEventListener('change', updateGrantDate);
     updateGrantDate();
+
+    // ▼ 有給残日数・前年度繰越・失効日数を自動計算
+    function calcPaidLeave() {
+        const valCurrent = parseInt(currentYear.value) || 0;
+        const valLastGranted = parseInt(lastYearGranted.value) || 0;
+        const valLastTaken = parseInt(lastYearTaken.value) || 0;
+        const valTwoYearsAgoG = parseInt(twoYearsAgoGranted.value) || 0;
+        const valTwoYearsAgoC = parseInt(twoYearsAgoCarried.value) || 0;
+
+        const lastCarried = valTwoYearsAgoG + valTwoYearsAgoC - valLastTaken; // ➌
+        lastYearCarried.value = lastCarried;
+
+        remainingDays.value = valLastGranted + lastCarried - valCurrent; // ➋+➌-➊
+        expirationDays.value = Math.max(0, lastCarried - valCurrent);
+    }
+
+    [currentYear, lastYearGranted, lastYearTaken, twoYearsAgoGranted, twoYearsAgoCarried].forEach(el => {
+        el.addEventListener('input', calcPaidLeave);
+    });
+
+    calcPaidLeave();
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    // --- 既存の hire_date や有給計算コード ---
+    // ...
+
+    // --- 二重送信防止 ---
+    const form = document.getElementById('userCreateForm');
+    const submitBtn = form.querySelector('button[type="submit"], .update-btn');
+
+    form.addEventListener('submit', function () {
+        submitBtn.disabled = true;
+    });
 });
 </script>
 @endsection

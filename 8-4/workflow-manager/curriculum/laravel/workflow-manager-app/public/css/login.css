@@ -63,10 +63,6 @@ button {
     font-size: 0.95em;
 }
 
-button:hover {
-    background-color: #bbb;
-}
-
 .password-change {
     display: block;
     margin-top: 6px;
@@ -81,6 +77,33 @@ button:hover {
     font-size: 0.9em;
     margin-left: 5px;
 }
+
+/* ================================
+   ログイン画面 hover
+================================ */
+
+/* 入力欄 hover */
+.form-group input:hover {
+    background-color: #e6e6e6;
+}
+
+/* 入力中（フォーカス） */
+.form-group input:focus {
+    background-color: #e6e6e6;
+    outline: none;
+    border-color: #999;
+}
+
+/* ログインボタン hover */
+button:hover {
+    background-color: #999;
+}
+
+/* パスワード変更リンク hover */
+.password-change:hover {
+    opacity: 0.5;
+}
+
 
 /* レスポンシブ */
 @media (max-width: 550px) {

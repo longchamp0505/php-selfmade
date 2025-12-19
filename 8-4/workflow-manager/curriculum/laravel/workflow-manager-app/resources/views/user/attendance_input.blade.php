@@ -181,13 +181,19 @@
 
         </div>
         <div class="summary-right">
-            <button class="submit-btn">月次申請</button>
+            <form id="monthlySubmitForm" method="POST"
+                action="{{ route('user.attendance.monthly.submit') }}">
+                @csrf
+                <input type="hidden" name="year" value="{{ $year }}">
+                <input type="hidden" name="month" value="{{ $month }}">
+                <button type="submit" class="submit-btn">月次申請</button>
+            </form>
         </div>
+
     </div>
 
 </div>
 @endsection
-
 @section('js')
 <script>
 function timeToMinutes(time) {
@@ -241,8 +247,15 @@ function updateRowAndSummary(row) {
         });
 }
 
-function setRowState(row, isSubmitted, isRejected, isApproved, rejectionComment = '') {
-    // --- 色付け ---
+// 行の状態設定（申請済みのみ編集不可）
+function setRowState(row) {
+    const checkbox = row.querySelector('.submit-checkbox');
+    const isSubmitted = checkbox.checked;
+    const isRejected = row.dataset.rejection == '1';
+    const isApproved = row.dataset.approvedByClients == '1' || row.dataset.approvedByAdmins == '1';
+    const rejectionComment = row.dataset.rejectionComment || '';
+
+    // 色付け
     row.classList.remove('submitted','rejected','approved');
     if(isApproved){
         row.classList.add('approved');
@@ -252,7 +265,7 @@ function setRowState(row, isSubmitted, isRejected, isApproved, rejectionComment 
         row.classList.add('submitted');
     }
 
-    // 差戻コメント
+    // 差戻コメント表示
     const remarksTd = row.querySelector('.td-remarks');
     let commentDiv = remarksTd.querySelector('.rejection-comment');
     if(isRejected && rejectionComment){
@@ -266,54 +279,52 @@ function setRowState(row, isSubmitted, isRejected, isApproved, rejectionComment 
         commentDiv.remove();
     }
 
-    // 承認①・②表示（列番号依存なし）
+    // 承認表示
     const approve1Td = row.querySelector('.td-approve1');
     if(approve1Td){
-        approve1Td.textContent = row.dataset.approvedByClients == '1' 
-            ? '◎' 
-            : (isRejected && row.querySelector('.other-company-checkbox')?.checked ? '×' : '');
+        approve1Td.textContent = row.dataset.approvedByClients == '1' ? '◎' : (isRejected && row.querySelector('.other-company-checkbox')?.checked ? '×' : '');
     }
     const approve2Td = row.querySelector('.td-approve2');
     if(approve2Td){
-        approve2Td.textContent = row.dataset.approvedByAdmins == '1' 
-            ? '◎' 
-            : (isRejected && !row.querySelector('.other-company-checkbox')?.checked ? '×' : '');
+        approve2Td.textContent = row.dataset.approvedByAdmins == '1' ? '◎' : (isRejected && !row.querySelector('.other-company-checkbox')?.checked ? '×' : '');
     }
 
-    // 入力制御
-    const inputDisabled = isApproved;
+    // 申請済みは編集不可（それ以外は自由に編集可能）
     row.querySelectorAll('.start-time, .end-time, .break-time, .category-select, .other-company-checkbox, .remarks').forEach(input => {
-        input.disabled = inputDisabled;
+        input.disabled = isSubmitted;
     });
-
-    const submitCheckbox = row.querySelector('.submit-checkbox');
-    if(submitCheckbox){
-        submitCheckbox.disabled = isApproved;
-    }
+    checkbox.disabled = isApproved; // 承認済みだけチェック不可
 }
-
-const hasClient = {{ $user->client_id ? 'true' : 'false' }};
 
 // 初期表示
 document.querySelectorAll('tbody tr').forEach(row => {
+    setRowState(row);
+
     const checkbox = row.querySelector('.submit-checkbox');
-    const isSubmitted = checkbox.checked;
-    const isRejected = row.dataset.rejection == '1';
-    const isApproved = row.dataset.approvedByClients == '1' || row.dataset.approvedByAdmins == '1';
-    const rejectionComment = row.dataset.rejectionComment || '';
-
-    setRowState(row, isSubmitted, isRejected, isApproved, rejectionComment);
-
     checkbox.addEventListener('change', function() {
+        const row = this.closest('tr');
         const category = row.querySelector('.category-select').value;
         const start = row.querySelector('.start-time').value;
         const end = row.querySelector('.end-time').value;
+         // 始業・終業が不要な区分
+        const noTimeRequiredCategories = ['公休','有給','振休','欠勤'];
 
-        // 必須項目チェック
-        if(this.checked && (!category || !start || !end)){
-            alert('必須項目（区分・始業・終業）を入力してください');
-            this.checked = false;
-            return;
+        if (this.checked) {
+            // 区分は常に必須
+            if (!category) {
+                alert('区分を選択してください');
+                this.checked = false;
+                return;
+            }
+
+            // 始業・終業が必要な区分だけチェック
+            if (!noTimeRequiredCategories.includes(category)) {
+                if (!start || !end) {
+                    alert('始業・終業を入力してください');
+                    this.checked = false;
+                    return;
+                }
+            }
         }
 
         const date = this.dataset.date;
@@ -344,12 +355,13 @@ document.querySelectorAll('tbody tr').forEach(row => {
                 alert(data.message);
                 checkbox.checked = !checkbox.checked;
             }
+            // 申請済み・差戻・承認状態反映
+            row.dataset.rejection = data.rejection ?? 0;
+            row.dataset.approvedByClients = data.is_approved_by_clients ?? 0;
+            row.dataset.approvedByAdmins = data.is_approved_by_admins ?? 0;
+            row.dataset.rejectionComment = data.rejection_comment ?? '';
 
-            const rejection = data.rejection == 1;
-            const isApproved = data.is_approved_by_clients == 1 || data.is_approved_by_admins == 1;
-            const rejectionComment = data.rejection_comment || '';
-
-            setRowState(row, isSubmitted, rejection, isApproved, rejectionComment);
+            setRowState(row);
             updateRowAndSummary(row);
         });
     });
@@ -364,5 +376,39 @@ document.querySelectorAll('.break-time').forEach(input => {
         }
     });
 });
+
+// 月次申請前チェック
+document.getElementById('monthlySubmitForm')
+    ?.addEventListener('submit', function (e) {
+
+    const rows = document.querySelectorAll('tbody tr');
+    let notSubmittedDates = [];
+
+    rows.forEach(row => {
+        const checkbox = row.querySelector('.submit-checkbox');
+        const dateText = row.querySelector('.td-date')?.textContent ?? '';
+
+        if (!checkbox.checked) {
+            notSubmittedDates.push(dateText);
+        }
+    });
+
+    if (notSubmittedDates.length > 0) {
+        e.preventDefault();
+        alert(
+            '未申請の日付があります。\n\n' +
+            notSubmittedDates.join(', ') +
+            '\n\nすべて申請してから月次申請してください。'
+        );
+        return false;
+    }
+
+    if (!confirm('この月の勤怠を月次申請します。よろしいですか？')) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+
 </script>
 @endsection

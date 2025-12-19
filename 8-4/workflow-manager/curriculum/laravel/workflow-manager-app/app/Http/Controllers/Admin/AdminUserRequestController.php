@@ -17,7 +17,8 @@ class AdminUserRequestController extends Controller
      */
     public function index($user_id, Request $request)
     {
-        $year  = $request->input('year', now()->year);
+        // 年度開始年を取得
+        $year  = $request->input('year', now()->month >= 4 ? now()->year : now()->year - 1);
         $month = $request->input('month', now()->month);
 
         // -------------------------
@@ -28,8 +29,11 @@ class AdminUserRequestController extends Controller
         // -------------------------
         // 勤怠データ（月別集計）
         // -------------------------
+        $startDate = Carbon::create($year, 4, 1)->startOfDay();
+        $endDate   = Carbon::create($year + 1, 3, 31)->endOfDay();
+
         $attendances = Attendance::where('user_id', $user_id)
-            ->whereYear('date', $year)
+            ->whereBetween('date', [$startDate, $endDate])
             ->get()
             ->groupBy(fn($item) => Carbon::parse($item->date)->month);
 
@@ -48,7 +52,10 @@ class AdminUserRequestController extends Controller
             'missingClock'     => 0,
         ];
 
-        for ($m = 1; $m <= 12; $m++) {
+        // 年度順：4月～3月
+        $monthOrder = array_merge(range(4,12), range(1,3));
+
+        foreach ($monthOrder as $m) {
             $monthData = $attendances->get($m, collect());
 
             $monthSummary = [
@@ -135,19 +142,24 @@ class AdminUserRequestController extends Controller
         $summary['totalOverMinutes'] = $summary['dailyOverMinutes'] + $summary['weeklyOverMinutes'];
 
         // -------------------------
-        // 休暇データ
+        // 休暇データ（月単位）
         // -------------------------
         $leaves = Leave::where('user_id', $user_id)
-            ->whereYear('date', $year)
+            ->whereYear('date', $month >= 4 ? $year : $year + 1) // 年度跨ぎ考慮
             ->whereMonth('date', $month)
             ->orderBy('date')
             ->get();
 
         $leavesData = $leaves->map(function ($leave) {
+            $user = $leave->user;
+
             return [
                 'id' => $leave->id,
                 'user_id' => $leave->user_id,
-                'name' => $leave->user->name ?? '',
+                'name' => $user->name ?? '',
+                'department' => $user->department ?? '',
+                'workplace' => $user->workplace ?? '',
+                'contract_type' => $user->contract_type ?? '',
                 'leave_type' => $leave->leave_type,
                 'date' => $leave->date,
                 'note' => $leave->note,
@@ -157,10 +169,10 @@ class AdminUserRequestController extends Controller
         })->toArray();
 
         // -------------------------
-        // 経費データ
+        // 経費データ（月単位）
         // -------------------------
         $expenseList = Expense::where('user_id', $user_id)
-            ->whereYear('date', $year)
+            ->whereYear('date', $month >= 4 ? $year : $year + 1)
             ->whereMonth('date', $month)
             ->orderBy('date')
             ->get();
@@ -171,8 +183,8 @@ class AdminUserRequestController extends Controller
         return view('admin.staff_management', [
             'user'        => $user,
             'year'        => $year,
-            'month'       => $month,
             'months'      => $months,
+            'month'       => $month,
             'summary'     => $summary,
             'leaves'      => $leaves,
             'leavesData'  => $leavesData,

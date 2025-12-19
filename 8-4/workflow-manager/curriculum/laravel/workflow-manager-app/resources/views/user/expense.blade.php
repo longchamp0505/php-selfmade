@@ -71,7 +71,7 @@
                     <!-- 支払先 -->
                     <div class="form-row">
                         <label for="payee">支払先</label>
-                        <input type="text" name="payee" id="payee" class="large-input">
+                        <input type="text" name="payee" id="payee" class="large-input" required>
                     </div>
 
                     <!-- 用途 -->
@@ -300,9 +300,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // ------------------------------
     fileBtn.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', function() {
-        fileNameDisplay.value = this.files.length ? this.files[0].name : '';
-        existingDiv.style.display = this.files.length ? 'none' : 'block';
+        const allowed = ['image/jpeg','image/png','application/pdf'];
+        const file = this.files[0];
+
+        if(file && !allowed.includes(file.type)){
+            alert('添付できるファイルは JPG, PNG, PDF のみです。');
+            this.value = ''; // 選択をリセット
+            fileNameDisplay.value = '';
+            existingDiv.style.display = 'block';
+            return;
+        }
+
+        fileNameDisplay.value = file ? file.name : '';
+        existingDiv.style.display = file ? 'none' : 'block';
     });
+
+
 
     // ------------------------------
     // モーダル外クリックで閉じる

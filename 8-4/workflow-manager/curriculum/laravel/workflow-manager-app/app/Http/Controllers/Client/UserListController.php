@@ -199,13 +199,18 @@ class UserListController extends Controller
         return view('client.approval', compact('staff', 'attendanceData', 'summary', 'year', 'month'));
     }
 
-
     public function updateApproval(Request $request, $userId)
     {
-        // 承認処理
-        if ($request->approved) {
+        $approvedDates    = $request->approved ?? [];
+        $unapprovedDates  = $request->unapproved ?? [];
+        $rejectedDates    = $request->rejected ?? [];
+        $unrejectedDates  = $request->unrejected ?? [];
+        $rejectionComments = $request->rejection_comment ?? [];
+
+        // 承認
+        foreach ($approvedDates as $date) {
             Attendance::where('user_id', $userId)
-                ->whereIn('date', $request->approved)
+                ->where('date', $date)
                 ->update([
                     'is_approved_by_clients' => 1,
                     'clients_approved_at' => now(),
@@ -214,22 +219,41 @@ class UserListController extends Controller
                 ]);
         }
 
-        // 差戻処理
-        if ($request->rejected) {
-            foreach ($request->rejected as $date) {
-                Attendance::where('user_id', $userId)
-                    ->where('date', $date)
-                    ->update([
-                        'rejection' => 1,
-                        'is_approved_by_clients' => 0,
-                        'clients_approved_at' => null,
-                        'rejection_comment' => $request->rejection_comment[$date] ?? null
-                    ]);
-            }
+        // 承認解除
+        foreach ($unapprovedDates as $date) {
+            Attendance::where('user_id', $userId)
+                ->where('date', $date)
+                ->update([
+                    'is_approved_by_clients' => 0,
+                    'clients_approved_at' => null
+                ]);
         }
 
-        return back()->with('success', '承認処理が完了しました');
+        // 差戻
+        foreach ($rejectedDates as $date) {
+            Attendance::where('user_id', $userId)
+                ->where('date', $date)
+                ->update([
+                    'rejection' => 1,
+                    'is_approved_by_clients' => 0,
+                    'clients_approved_at' => null,
+                    'rejection_comment' => $rejectionComments[$date] ?? null
+                ]);
+        }
+
+        // 差戻解除
+        foreach ($unrejectedDates as $date) {
+            Attendance::where('user_id', $userId)
+                ->where('date', $date)
+                ->update([
+                    'rejection' => 0,
+                    'rejection_comment' => null
+                ]);
+        }
+
+        return response()->json(['status' => 'success']);
     }
+
 
     public function exportPdf(Request $request)
     {

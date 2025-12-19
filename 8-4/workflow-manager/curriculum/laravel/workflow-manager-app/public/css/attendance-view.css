@@ -43,6 +43,11 @@
     text-decoration: none;
 }
 
+.header-right .back-btn:hover {
+    background-color: #666;
+}
+
+
 /* メイン */
 .attendance-main {
     flex: 1;
@@ -79,6 +84,12 @@
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 10px 6px;
+}
+
+.month-picker select:hover {
+    background-color: #e6e6e6;
+    color: #333;
+
 }
 
 /* テーブル */

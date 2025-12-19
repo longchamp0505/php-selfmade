@@ -47,6 +47,11 @@
     margin-left: 8px;
 }
 
+.header-right .back-btn:hover {
+    background-color: #666;
+}
+
+
 .header-right a.csv-btn {
     padding: 10px 15px;
     font-size: 14px;
@@ -84,6 +89,12 @@
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 10px 6px;
+}
+
+
+.month-picker select:hover {
+    background-color: #e6e6e6;
+    color: #333;
 }
 
 /* 共通高さ変数（年月セレクトと同じ高さ） */
@@ -138,6 +149,11 @@
     box-sizing: border-box;
 }
 
+.search-box .search-btn:hover {
+    background-color: #666;
+}
+
+
 /* セレクトボックス */
 .search-box select {
     width: 130px; /* 固定幅で広く */
@@ -158,6 +174,11 @@
     box-sizing: border-box;
 }
 
+.search-box select:hover {
+    background-color: #e6e6e6;
+    color: #333;
+}
+
 /* クリアボタン */
 .search-box .clear-btn {
     width: 80px; /* 固定幅 */
@@ -174,6 +195,11 @@
     box-sizing: border-box;
     font-weight: bold;
 }
+
+.search-box .clear-btn:hover {
+    background-color: #666;
+}
+
 
 /* テーブル */
 .attendance-table-wrapper {
@@ -249,15 +275,41 @@ tbody tr:nth-child(even) td {
     color: #fff;
 }
 
-/* ページネーション */
 .pagination-wrapper {
-    width: 100%;
-    max-width: 1200px;
-    padding: 12px 36px;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
+
+.page-box {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.page-box:hover {
+    background-color: #f0f0f0;
+}
+
+.page-box.active {
+    background-color: #888;
+    color: #fff;
+    cursor: default;
+}
+
+.page-box.disabled {
+    color: #aaa;
+    border-color: #eee;
+    cursor: not-allowed;
+}
+
+
 
 /* ----------------------------------------
    差し戻しコメントモーダル

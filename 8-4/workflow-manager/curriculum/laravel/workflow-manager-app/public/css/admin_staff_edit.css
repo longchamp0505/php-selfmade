@@ -55,9 +55,18 @@
     border: none;
 }
 
-.back-btn {
-    background-color: #8c8c8c;
+.update-btn:hover {
+    background-color: #ffb0c0; 
 }
+
+.back-btn {
+    background-color: #888;
+}
+
+.back-btn:hover {
+    background-color: #666;
+}
+
 
 /* ▼ 本文 */
 .edit-body {
@@ -165,7 +174,7 @@
     font-size: 12px;
     border: none;
     width: 150px;
-    margin-left: 36px;     /* 必要に応じて調整 */
+    margin-top: 15px;
 }
 
 
@@ -194,8 +203,38 @@
     box-shadow: none;
 }
 
+.error-text,
 .error-message {
     color: red;
     font-size: 0.9em;
     margin-left: 5px;
+}
+
+/* ==========================
+   フォーム hover 共通
+========================== */
+
+/* 通常 hover（未フォーカス） */
+.info-row input:hover,
+.info-row select:hover,
+.value-with-input input:hover,
+.value-with-input select:hover {
+    background-color: #e6e6e6;
+    cursor: pointer;
+}
+
+/* フォーカス時（クリック中） */
+.info-row input:focus,
+.info-row select:focus,
+.value-with-input input:focus,
+.value-with-input select:focus {
+    background-color: #ffffff;
+    border-bottom: 1px solid #888;
+}
+
+/* disabled は hover させない */
+.info-row input:disabled:hover,
+.info-row select:disabled:hover {
+    background-color: #fff;
+    cursor: default;
 }

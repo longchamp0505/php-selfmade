@@ -46,6 +46,11 @@
     text-decoration: none;
 }
 
+.header-right .back-btn:hover {
+    background-color: #666;
+}
+
+
 /* 年月セレクト */
 .month-picker {
     display: flex;
@@ -73,6 +78,12 @@
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 10px 6px;
+}
+
+.month-picker select:hover {
+    background-color: #e6e6e6;
+    color: #333;
+
 }
 
 
@@ -209,6 +220,13 @@ input[type="text"] {
 input[type="checkbox"] {
     transform: scale(1.2);
 }
+
+/* hover 時 */
+input[type="checkbox"]:hover {
+    filter: brightness(0.85);
+}
+
+
 /* 月末サマリー + ボタンを同じ行 */
 .summary-container {
     width: 100%;
@@ -359,15 +377,29 @@ tr:not(.submitted) textarea {
     cursor: pointer;
 }
 
-/* OK → ピンク */
+
+/* OKボタン */
 #rejection-modal .ok-btn {
     background-color: #ffc3d2;
+    cursor: pointer;
 }
 
-/* キャンセル → グレー */
+/* OKボタン hover */
+#rejection-modal .ok-btn:hover {
+    background-color: #ffafc4;
+}
+
+/* キャンセルボタン */
 #rejection-modal .cancel-btn {
     background-color: #aaaaaa;
+    cursor: pointer;
 }
+
+/* キャンセルボタン hover */
+#rejection-modal .cancel-btn:hover {
+    background-color: #8f8f8f;
+}
+
 /* 承認済み */
 tr.approved td,
 tr.approved td * {

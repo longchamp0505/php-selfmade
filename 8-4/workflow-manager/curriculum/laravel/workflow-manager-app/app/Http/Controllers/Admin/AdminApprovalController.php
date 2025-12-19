@@ -22,6 +22,7 @@ class AdminApprovalController extends Controller
 
         // ページネーションで取得
         $staffs = User::with('client')
+            ->whereNull('retire_date')
             ->when($keyword, fn($q) =>
                 $q->where('id', 'like', "%$keyword%")
                 ->orWhere('name', 'like', "%$keyword%")
@@ -225,7 +226,7 @@ class AdminApprovalController extends Controller
                 '管理者承認',
             ]);
 
-            $staffs = User::all();
+            $staffs = User::whereNull('retire_date')->get();
 
             foreach ($staffs as $staff) {
 

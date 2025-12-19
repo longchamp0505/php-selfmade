@@ -56,6 +56,10 @@
 
 }
 
+.header-right a:hover,
+.header-right button:hover {
+    background-color: #666;
+}
 .info-block {
     padding: 0 36px;
 
@@ -126,7 +130,7 @@
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    background-color: #9a9898;
+    background-color: #888;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -134,4 +138,5 @@
 
 .pdf-btn:hover {
     opacity: 0.9;
+    background-color: #666;
 }

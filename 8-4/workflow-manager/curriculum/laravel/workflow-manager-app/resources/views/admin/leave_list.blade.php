@@ -141,8 +141,13 @@
                         </td>
 
                         <td>{{ $row['note'] ?? '' }}</td>
-                        <td>{{ $row['remaining_days'] ?? 0 }}日</td>
-                        <td>{{ $row['current_year_taken'] ?? 0 }}日</td>
+                        <td class="remaining-days" data-user="{{ $row['user_id'] }}">
+                            {{ $row['remaining_days'] ?? 0 }}日
+                        </td>
+                        <td class="current-year-taken" data-user="{{ $row['user_id'] }}">
+                            {{ $row['current_year_taken'] ?? 0 }}日
+                        </td>
+
                         <td>
                             <input type="checkbox" class="rejection-checkbox" data-id="{{ $row['id'] }}" 
                                 @if($row['is_rejection']) checked @endif
@@ -211,11 +216,23 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(res => res.json())
             .then(data => {
                 if (!data.success) {
-                    alert('承認に失敗しました');
+                    alert(data.message ?? '承認に失敗しました');
                     checkbox.checked = !checkbox.checked;
-                    rejectionCheckbox.disabled = checkbox.checked ? true : false;
+                    rejectionCheckbox.disabled = checkbox.checked;
+                    return;
                 }
+
+                // ★ user_id単位で全部更新
+                document
+                .querySelectorAll(`.remaining-days[data-user="${data.user_id}"]`)
+                .forEach(el => el.innerText = `${data.remaining_days}日`);
+
+                document
+                .querySelectorAll(`.current-year-taken[data-user="${data.user_id}"]`)
+                .forEach(el => el.innerText = `${data.current_year_taken}日`);
             })
+
+
             .catch(() => {
                 alert('通信エラー');
                 checkbox.checked = !checkbox.checked;

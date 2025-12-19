@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\Admin;
+use App\Services\PaidLeaveUpdateService;
 
 class LoginController extends Controller
 {
@@ -40,13 +41,22 @@ class LoginController extends Controller
             'id' => $request->id,
             'password' => $request->password,
         ])) {
+
+            // ログイン成功時に有給更新
+            $paidLeaveService = new PaidLeaveUpdateService();
+
             switch($type){
                 case 'user':
-                    return redirect()->route('user.home');
+                    $user = Auth::guard($guard)->user();
+                    $paidLeaveService->updateForUser($user);
+                    return redirect()->route('user.home')
+                        ->with('success', 'ログイン時に有給情報を更新しました');
                 case 'client':
                     return redirect()->route('client.home');
                 case 'admin':
-                    return redirect()->route('admin.home');
+                    $paidLeaveService->updateForAll();
+                    return redirect()->route('admin.home')
+                        ->with('success', '全スタッフの有給情報を更新しました');
             }
         }
 
@@ -74,6 +84,4 @@ class LoginController extends Controller
 
         return redirect()->route('login', ['type' => $type]);
     }
-
-
 }

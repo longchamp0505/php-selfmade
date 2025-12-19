@@ -127,34 +127,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($leaves as $leave)
-                    <tr>
-                        <td>{{ \Carbon\Carbon::parse($leave->date)->format('n/j') }}</td>
-                        <td>{{ ['日','月','火','水','木','金','土'][\Carbon\Carbon::parse($leave->date)->dayOfWeek] }}</td>
-                        <td>{{ $leave->leave_type }}</td>
-                        <td>{{ $leave->note }}</td>
-                        <td>
-                            @if($leave->is_approved_by_admins)
-                                ◎
-                            @elseif($leave->is_rejection)
-                                ×
-                            @endif
-                        </td>
-
-                        <td>
-                            @if($leave->is_rejection)
-                                <a href="javascript:void(0);" 
-                                   class="resubmit-btn"
-                                   data-id="{{ $leave->id }}">
-                                   再申請
-                                </a>
-                            @else
-                                -
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
+                    @forelse ($leaves as $leave)
+                        <tr>
+                            <td>{{ \Carbon\Carbon::parse($leave->date)->format('n/j') }}</td>
+                            <td>{{ ['日','月','火','水','木','金','土'][\Carbon\Carbon::parse($leave->date)->dayOfWeek] }}</td>
+                            <td>{{ $leave->leave_type }}</td>
+                            <td>{{ $leave->note }}</td>
+                            <td>
+                                @if($leave->is_approved_by_admins)
+                                    ◎
+                                @elseif($leave->is_rejection)
+                                    ×
+                                @endif
+                            </td>
+                            <td>
+                                @if($leave->is_rejection)
+                                    <a href="javascript:void(0);" 
+                                    class="resubmit-btn"
+                                    data-id="{{ $leave->id }}">
+                                        再申請
+                                    </a>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6">データがありません</td>
+                        </tr>
+                    @endforelse
                 </tbody>
+
             </table>
         </div>
 
@@ -190,6 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateInput = document.getElementById('leave-date');
     const typeInput = document.getElementById('leave-type');
     const noteInput = document.getElementById('leave-note');
+
+    const appliedDates = @json($leaves->pluck('date')->values());
 
     /* ▼ 新規申請（空で開く） */
     document.getElementById('open-leave-form').addEventListener('click', () => {
@@ -238,6 +244,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('month-select').addEventListener('change', () => {
         document.getElementById('year-month-form').submit();
     });
+
+    document.getElementById('leave-submit-btn').addEventListener('click', (e) => {
+        const selectedDate = document.getElementById('leave-date').value;
+
+        if (!selectedDate) return;
+
+        if (appliedDates.includes(selectedDate)) {
+            e.preventDefault();
+            alert('その日はすでに休暇申請があります');
+            return;
+        }
+    });
+
 
 });
 </script>

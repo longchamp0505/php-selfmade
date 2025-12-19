@@ -53,7 +53,7 @@ class AdminUserController extends Controller
             }
         }
 
-        $users = $query->orderBy('id')->paginate(20)->appends($request->query());
+        $users = $query->orderBy('id')->paginate(15)->appends($request->query());
 
         // 部署・契約形態のセレクト用
         $departments = User::select('department')->distinct()->pluck('department');

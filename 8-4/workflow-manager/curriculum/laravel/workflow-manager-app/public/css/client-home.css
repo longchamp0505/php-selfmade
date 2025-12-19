@@ -40,6 +40,7 @@
     color: #555;
 }
 
+/* ログアウトボタン */
 .header-right button {
     padding: 10px 15px;
     font-size: 14px;
@@ -51,10 +52,15 @@
     cursor: pointer;
 }
 
+/* ★ホバー */
+.header-right button:hover {
+    background-color: #666;
+}
+
 .header-right form {
     display: flex;
-    align-items: center; /* 垂直中央揃え */
-    margin: 0; /* 不要な余白を削除 */
+    align-items: center;
+    margin: 0;
 }
 
 /* メイン */
@@ -76,9 +82,15 @@
     gap: 5px;
 }
 
+/* aタグの装飾除去 */
+.menu-buttons a {
+    text-decoration: none;
+}
+
+/* メニューボタン本体 */
 .menu-buttons button {
     width: 100%;
-    padding: 16px;
+    padding: 16px 34px;
     font-size: 18px;
     color: #555;
     background-color: #fff;
@@ -86,7 +98,12 @@
     border-radius: 8px;
     text-align: left;
     cursor: pointer;
-    padding-left: 34px;
+}
+
+/* ★ホバー */
+.menu-buttons button:hover {
+    background-color: #e6e6e6;
+    color: #333;
 }
 
 /* お知らせ（ユーザーより少し広め） */
@@ -108,7 +125,7 @@
     padding: 10px 34px;
     font-weight: bold;
     font-size: 18px;
-    border-radius: 10px 10px 0 0;
+    border-radius: 15px 15px 0 0;
 }
 
 .notice-content {
@@ -119,18 +136,60 @@
     overflow-y: auto;
 }
 
+/* お知らせ内リンク */
+.notice-content a {
+    color: #d6336c;
+    font-weight: bold;
+}
+
+.notice-content a:hover {
+    text-decoration: underline;
+}
+
 /* レスポンシブ */
 @media (max-width: 992px) {
-    .header-left { font-size: 26px; }
-    .menu-buttons button { font-size: 16px; padding: 14px; }
-    .notice-header { font-size: 16px; }
+    .header-left {
+        font-size: 26px;
+    }
+
+    .menu-buttons button {
+        font-size: 16px;
+        padding: 14px 28px;
+    }
+
+    .notice-header {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 550px) {
-    .header-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .header-left { font-size: 22px; }
-    .header-right button { width: 100%; padding: 12px; font-size: 16px; }
-    .menu-buttons button { font-size: 14px; padding: 12px; padding-left: 20px; }
-    .notice-header { font-size: 14px; padding-left: 20px; }
-    .notice-content { padding-left: 16px; }
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .header-left {
+        font-size: 22px;
+    }
+
+    .header-right button {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .menu-buttons button {
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+
+    .notice-header {
+        font-size: 14px;
+        padding-left: 20px;
+    }
+
+    .notice-content {
+        padding-left: 16px;
+    }
 }

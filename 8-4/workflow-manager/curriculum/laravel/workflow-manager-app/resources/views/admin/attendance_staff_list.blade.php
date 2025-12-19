@@ -155,9 +155,31 @@
     </div>
 
     <!-- ▼ ページネーション -->
-    <div class="pagination-wrapper">
-        {{ $staffs->appends(request()->query())->links() }}
+    <div class="pagination-wrapper flex justify-center space-x-1 mt-4">
+        {{-- 前へ --}}
+        @if ($staffs->onFirstPage())
+            <span class="page-box disabled">&laquo;</span>
+        @else
+            <a href="{{ $staffs->previousPageUrl() }}" class="page-box">&laquo;</a>
+        @endif
+
+        {{-- ページ番号 --}}
+        @for ($i = 1; $i <= $staffs->lastPage(); $i++)
+            @if ($i == $staffs->currentPage())
+                <span class="page-box active">{{ $i }}</span>
+            @else
+                <a href="{{ $staffs->url($i) }}" class="page-box">{{ $i }}</a>
+            @endif
+        @endfor
+
+        {{-- 次へ --}}
+        @if ($staffs->hasMorePages())
+            <a href="{{ $staffs->nextPageUrl() }}" class="page-box">&raquo;</a>
+        @else
+            <span class="page-box disabled">&raquo;</span>
+        @endif
     </div>
+
 
 </div>
 @endsection

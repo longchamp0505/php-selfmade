@@ -53,6 +53,13 @@ class LeaveController extends Controller
         $user = Auth::user();
         $dayOfWeek = Carbon::parse($request->date)->dayOfWeek;
 
+        if (Leave::where('user_id', $user->id)
+            ->whereDate('date', $request->date)
+            ->exists()
+        ) {
+            return back()->with('error', 'その日はすでに休暇申請があります');
+        }
+
         Leave::create([
             'user_id'    => $user->id,
             'date'       => $request->date,
@@ -95,6 +102,14 @@ class LeaveController extends Controller
             'leave_type' => 'required|string|max:50',
             'note'       => 'nullable|string|max:1000',
         ]);
+
+        if (Leave::where('user_id', $user->id)
+            ->whereDate('date', $request->date)
+            ->where('id', '!=', $leave->id)
+            ->exists()
+        ) {
+            return back()->with('error', 'その日はすでに休暇申請があります');
+        }
 
         $leave->update([
             'date'       => $request->date,

@@ -47,6 +47,11 @@
     margin-left: 8px;
 }
 
+.header-right .back-btn:hover {
+    background-color: #666;
+}
+
+
 .header-right a.csv-btn {
     padding: 10px 15px;
     font-size: 14px;
@@ -57,6 +62,12 @@
     text-decoration: none;
     margin-left: 8px;
 }
+
+.header-right a.csv-btn:hover {
+    background-color: #ffb0c0; 
+}
+
+
 
 /* 年月セレクト */
 .month-picker {
@@ -84,6 +95,12 @@
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 10px 6px;
+}
+
+.month-picker select:hover {
+    background-color: #e6e6e6;
+    color: #333;
+
 }
 
 /* 共通高さ変数（年月セレクトと同じ高さ） */
@@ -138,6 +155,11 @@
     box-sizing: border-box;
 }
 
+.search-box .search-btn:hover {
+    background-color: #666;
+
+}
+
 /* セレクトボックス */
 .search-box select {
     width: 120px; /* 固定幅で広く */
@@ -158,11 +180,16 @@
     box-sizing: border-box;
 }
 
+.search-box select:hover {
+    background-color: #e6e6e6;
+    color: #333;
+}
+
 /* クリアボタン */
 .search-box .clear-btn {
     width: 80px; /* 固定幅 */
     height: var(--input-height);
-    background-color: #929191; /* グレー背景 */
+    background-color: #888;
     border: none;
     border-radius: 4px;
     color: #fff;
@@ -173,6 +200,10 @@
     cursor: pointer;
     box-sizing: border-box;
     font-weight: bold;
+}
+
+.search-box .clear-btn:hover {
+    background-color: #666;
 }
 
 /* テーブル */
@@ -249,15 +280,43 @@ tbody tr:nth-child(even) td {
     color: #fff;
 }
 
-/* ページネーション */
-.pagination-wrapper {
-    width: 100%;
-    max-width: 1200px;
-    padding: 12px 36px;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
+.pdf-btn:hover {
+    background-color: #ffb0c0; 
 }
+
+.pagination-wrapper {
+    margin-bottom: 5px;
+}
+
+.page-box {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.page-box:hover {
+    background-color: #f0f0f0;
+}
+
+.page-box.active {
+    background-color: #888;
+    color: #fff;
+    cursor: default;
+}
+
+.page-box.disabled {
+    color: #aaa;
+    border-color: #eee;
+    cursor: not-allowed;
+}
+
 
 /* ----------------------------------------
    差し戻しコメントモーダル
@@ -330,12 +389,29 @@ tbody tr:nth-child(even) td {
     cursor: pointer;
 }
 
-/* OK → ピンク */
+/* OKボタン */
 #rejection-modal .ok-btn {
     background-color: #ffc3d2;
+    cursor: pointer;
 }
 
-/* キャンセル → グレー */
+/* OKボタン hover */
+#rejection-modal .ok-btn:hover {
+    background-color: #ffafc4;
+}
+
+/* キャンセルボタン */
 #rejection-modal .cancel-btn {
     background-color: #aaaaaa;
+    cursor: pointer;
+}
+
+/* キャンセルボタン hover */
+#rejection-modal .cancel-btn:hover {
+    background-color: #8f8f8f;
+}
+
+
+input[type="checkbox"]:hover {
+    filter: brightness(0.85);
 }

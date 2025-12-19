@@ -173,7 +173,8 @@
                         name="approved[]"
                         value="{{ $data['date'] }}"
                         {{ $att && $att->is_approved_by_admins ? 'checked' : '' }}
-                        {{ !$isSubmitted || ($hasClient && $att && $att->is_other_company_work && !$att->is_approved_by_clients) ? 'disabled' : '' }}>
+                        {{ !$isSubmitted || ($hasClient && $att && !$att->is_approved_by_clients) ? 'disabled' : '' }}>
+
                 </td>
 
             </tr>

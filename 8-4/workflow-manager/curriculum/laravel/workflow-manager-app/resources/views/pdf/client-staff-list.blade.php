@@ -38,7 +38,7 @@ colgroup col:nth-child(13){width:5%;}
 
 th, td {
     border: 1px solid #444;
-    padding: 4px;
+    padding: 3.8px 4px;
     text-align: center;
     vertical-align: middle;
     page-break-inside: avoid;

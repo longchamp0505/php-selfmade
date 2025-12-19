@@ -133,10 +133,15 @@
 
         <!-- ▼ パスワード初期化 -->
         <form action="{{ route('admin.client.password.reset', ['client_id' => $client->id]) }}"
-              method="POST" style="display:inline;">
+            method="POST"
+            style="display:inline;"
+            onsubmit="return confirm('本当にパスワードを初期化しますか？');">
             @csrf
-            <button type="submit" class="btn-reset pink-btn">パスワード初期化</button>
+            <button type="submit" class="btn-reset pink-btn">
+                パスワード初期化
+            </button>
         </form>
+
 
         <!-- ▼ 稼働スタッフ -->
         <h3>■ 稼働スタッフ情報</h3>
@@ -213,4 +218,14 @@
 
     </div>
 </div>
+
+@if (session('success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            alert("{{ session('success') }}");
+        });
+    </script>
+@endif
+
+
 @endsection

@@ -43,6 +43,11 @@
     text-decoration: none;
 }
 
+.header-right .back-btn:hover {
+    background-color: #666;
+}
+
+
 /* メイン */
 .attendance-main {
     flex: 1;
@@ -79,6 +84,12 @@
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 10px 6px;
+}
+
+.month-picker select:hover {
+    background-color: #e6e6e6;
+    color: #333;
+
 }
 
 /* テーブル */
@@ -139,6 +150,10 @@ tbody tr:nth-child(even) td {
     color: #fff;
 }
 
+.pdf-btn:hover {
+    background-color: #ffb0c0; 
+}
+
 a.pdf-btn,
 a.pdf-btn:link,
 a.pdf-btn:visited,
@@ -164,4 +179,9 @@ a.pdf-btn:focus {
 .attendance-table-wrapper table tbody td a:hover {
     color: #f7b6b6 !important; /* ホバー時濃いピンク */
     text-decoration: underline;
+}
+
+/* hover 時 */
+input[type="checkbox"]:hover {
+    filter: brightness(0.85);
 }

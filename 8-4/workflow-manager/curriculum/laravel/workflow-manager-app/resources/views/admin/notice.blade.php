@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
 <div class="edit-wrapper">
 
     <!-- ▼ ヘッダー -->
@@ -61,4 +62,13 @@
 
     </form>
 </div>
+@if (session('success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            alert("{{ session('success') }}");
+        });
+    </script>
+@endif
+
+
 @endsection

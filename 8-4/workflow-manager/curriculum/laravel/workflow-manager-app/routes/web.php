@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\MonthlySubmissionController;
 use App\Http\Controllers\User\UserHomeController;
 use App\Http\Controllers\Client\ClientHomeController;
 use App\Http\Controllers\Admin\AdminHomeController;
@@ -78,6 +79,9 @@ Route::prefix('user')->name('user.')->middleware('auth:user')->group(function ()
 
      // 勤怠閲覧
     Route::get('/attendance/view', [AttendanceViewController::class, 'index'])->name('attendance.view');
+
+    Route::post('/attendance/monthly-submit', [MonthlySubmissionController::class, 'submitMonthly'])->name('attendance.monthly.submit');
+
 });
 
 /*

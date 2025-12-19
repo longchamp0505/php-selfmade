@@ -128,10 +128,31 @@
         </table>
     </div>
 
-    <!-- ▼ ページネーション -->
-    <div class="pagination-wrapper">
-        {{ $users->appends(request()->query())->links() }}
+    <div class="pagination-wrapper flex justify-center space-x-1 mt-4">
+        {{-- 前へ --}}
+        @if ($users->onFirstPage())
+            <span class="page-box disabled">&laquo;</span>
+        @else
+            <a href="{{ $users->previousPageUrl() }}" class="page-box">&laquo;</a>
+        @endif
+
+        {{-- ページ番号 --}}
+        @for ($i = 1; $i <= $users->lastPage(); $i++)
+            @if ($i == $users->currentPage())
+                <span class="page-box active">{{ $i }}</span>
+            @else
+                <a href="{{ $users->url($i) }}" class="page-box">{{ $i }}</a>
+            @endif
+        @endfor
+
+        {{-- 次へ --}}
+        @if ($users->hasMorePages())
+            <a href="{{ $users->nextPageUrl() }}" class="page-box">&raquo;</a>
+        @else
+            <span class="page-box disabled">&raquo;</span>
+        @endif
     </div>
+
 
 </div>
 @endsection

@@ -47,6 +47,11 @@
     margin-left: 8px;
 }
 
+.header-right .back-btn:hover {
+    background-color: #666;
+}
+
+
 .header-right a.pdf-btn {
     padding: 10px 28px;
     font-size: 14px;
@@ -56,6 +61,10 @@
     border-radius: 50px;
     text-decoration: none;
     margin-left: 8px;
+}
+
+.header-right a.pdf-btn:hover {
+    background-color: #ffb0c0; 
 }
 
 /* 年月セレクト */
@@ -85,6 +94,12 @@
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 10px 6px;
+}
+
+.month-picker select:hover {
+    background-color: #e6e6e6;
+    color: #333;
+
 }
 
 
@@ -180,6 +195,11 @@ input[type="text"] {
 input[type="checkbox"] {
     transform: scale(1.2);
 }
+
+input[type="checkbox"]:hover {
+    filter: brightness(0.85);
+}
+
 /* 月末サマリー + ボタンを同じ行 */
 .summary-container {
     width: 100%;
@@ -377,10 +397,18 @@ tr:not(.approved):not(.rejected) td * {
 }
 
 .approval-btn-area .edit-btn:hover {
+    background-color: #ffb0c0; 
+}
+
+.approval-btn-area .edit-btn:hover {
     text-decoration: none;     /* ← ホバー時も消す */
     opacity: 0.85;             /* ホバー演出（任意） */
 }
 
 
+th input[type="checkbox"] {
+    vertical-align: middle; /* 中央に揃える */
+    margin-left: 4px; /* 必要に応じて余白調整 */
+}
 
 
