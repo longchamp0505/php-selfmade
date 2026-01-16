@@ -15,7 +15,11 @@ class WorkHoursController extends Controller
     {
         $client = Auth::guard('client')->user();
 
-        $year = $request->query('year', now()->year);
+        $year = $request->query(
+            'year',
+            now()->month >= 4 ? now()->year : now()->year - 1
+        );
+
         $contractType = $request->query('contract_type', '');
 
         // 年度：4月～翌年3月

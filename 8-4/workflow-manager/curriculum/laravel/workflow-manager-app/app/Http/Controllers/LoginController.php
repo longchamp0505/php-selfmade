@@ -15,7 +15,7 @@ class LoginController extends Controller
     public function showLoginForm(Request $request)
     {
         // URLからユーザータイプを判定
-        $path = $request->path(); // 例: login/user
+        $path = $request->path(); 
         $type = explode('/', $path)[1]; // user, client, admin
 
         return view('login', ['type' => $type]);

@@ -16,7 +16,7 @@
 
             <div class="header-right">
                 <button form="clientCreateForm" class="update-btn">登録</button>
-                <a href="{{ route('admin.client.list') }}" class="back-btn">戻る</a>
+                <a href="{{ route('admin.home') }}" class="back-btn">戻る</a>
             </div>
         </div>
     </header>

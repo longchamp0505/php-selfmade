@@ -16,7 +16,11 @@ class AttendanceViewController extends Controller
     public function index(Request $request)
     {
         $user = Auth::guard('user')->user();
-        $year = $request->query('year', now()->year);
+        $year = $request->query(
+            'year',
+            now()->month >= 4 ? now()->year : now()->year - 1
+        );
+
 
         // 月番号を年度順（4月～翌年3月）
         $monthsOrder = array_merge(range(4, 12), range(1, 3));

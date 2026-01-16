@@ -11,7 +11,7 @@
     <div class="login-box">
         <h2>Login</h2>
 
-        {{-- エラーメッセージ --}}
+        <!-- エラーメッセージ  -->
         @if ($errors->any())
             <div class="error-box">
                 @foreach ($errors->all() as $error)
